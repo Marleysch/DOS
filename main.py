@@ -1,4 +1,3 @@
-import copy
 
 
 def getkandl(file):
@@ -36,7 +35,6 @@ def Select(k,l):
 	leftover = len(l) % 5
 	if leftover != 0:
 		subls.append([x for x in l[5 * (len(l)//5):]])
-	# print(f'subls: {subls}')
 
 	medians = []
 	for subl in subls:
@@ -48,35 +46,28 @@ def Select(k,l):
 	for num in l:
 		if num < M:
 			l1.append(num)
-	# print(f'l1: {l1}')
 
 	l3 = []
 	for num in l:
 		if num > M:
 			l3.append(num)
-	# print(f'l3: {l3}')
-	# print(f'k: {k}')
+
 	Mpos = len(l1) + 1
-	# print(f'Mpos: {Mpos}')
-	# print(f'M: {M}')
+
 
 	if k == Mpos:
-		# print('M won')
 		return M
 	elif k < Mpos:
-		# print('m<k')
 		return Select(k, l1)
 	else:
-		# print('m>k')
 		return Select(k-len(l1) - 1, l3)
 
+if __name__ == "__main__":
+	file = '7.txt'
+	kandl = getkandl(f"{file}")
+	l = kandl[1]
+	k = kandl[0]
+	print(f'k: {k}')
 
-
-
-file = '7.txt'
-kandl = getkandl(f"{file}.txt")
-l = kandl[1]
-k = kandl[0]
-
-print(f'size: {len(l)}\nanswer: {Select(k,l)}')
+	print(f'size: {len(l)}\nanswer: {Select(k,l)}')
 
